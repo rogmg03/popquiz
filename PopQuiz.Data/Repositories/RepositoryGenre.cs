@@ -1,18 +1,22 @@
-﻿using PAW3.Data.Repositories;
+﻿using PAW.Data.Models;
+using PopQuiz.Data.Models;
 
 namespace PAW.Data.Repositories;
 
 public interface IRepositoryGenre
 {
-    Task<bool> UpsertAsync(Genres entity, bool isUpdating);
-    Task<bool> CreateAsync(Genres entity);
-    Task<bool> DeleteAsync(Genres entity);
-    Task<IEnumerable<Genres>> ReadAsync();
-    Task<Genres> FindAsync(int id);
-    Task<bool> UpdateAsync(Genres entity);
-    Task<bool> UpdateManyAsync(IEnumerable<Genres> entities);
-    Task<bool> ExistsAsync(Genres entity);
+    Task<bool> UpsertAsync(Genre entity, bool isUpdating);
+    Task<bool> CreateAsync(Genre entity);
+    Task<bool> DeleteAsync(Genre entity);
+    Task<IEnumerable<Genre>> ReadAsync();
+    Task<Genre> FindAsync(int id);
+    Task<bool> UpdateAsync(Genre entity);
+    Task<bool> UpdateManyAsync(IEnumerable<Genre> entities);
+    Task<bool> ExistsAsync(Genre entity);
 }
-public class RepositoryGenre : RepositoryBase<Genres>, IRepositoryGenre
+public class RepositoryGenre : RepositoryBase<Genre>, IRepositoryGenre
 {
+    public RepositoryGenre(HallOfFameContext context) : base(context)
+    {
+    }
 }

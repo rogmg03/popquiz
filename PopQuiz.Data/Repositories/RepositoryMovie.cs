@@ -1,18 +1,22 @@
-﻿using PAW3.Data.Repositories;
+﻿using PAW.Data.Models;
+using PopQuiz.Data.Models;
 
 namespace PAW.Data.Repositories;
 
 public interface IRepositoryMovie
 {
-    Task<bool> UpsertAsync(Movies entity, bool isUpdating);
-    Task<bool> CreateAsync(Movies entity);
-    Task<bool> DeleteAsync(Movies entity);
-    Task<IEnumerable<Movies>> ReadAsync();
-    Task<Movies> FindAsync(int id);
-    Task<bool> UpdateAsync(Movies entity);
-    Task<bool> UpdateManyAsync(IEnumerable<Movies> entities);
-    Task<bool> ExistsAsync(Movies entity);
+    Task<bool> UpsertAsync(Movie entity, bool isUpdating);
+    Task<bool> CreateAsync(Movie entity);
+    Task<bool> DeleteAsync(Movie entity);
+    Task<IEnumerable<Movie>> ReadAsync();
+    Task<Movie> FindAsync(int id);
+    Task<bool> UpdateAsync(Movie entity);
+    Task<bool> UpdateManyAsync(IEnumerable<Movie> entities);
+    Task<bool> ExistsAsync(Movie entity);
 }
-public class RepositoryMovie : RepositoryBase<Movies>, IRepositoryMovie
+public class RepositoryMovie : RepositoryBase<Movie>, IRepositoryMovie
 {
+    public RepositoryMovie(HallOfFameContext context) : base(context)
+    {
+    }
 }

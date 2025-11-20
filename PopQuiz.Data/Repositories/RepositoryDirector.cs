@@ -1,4 +1,5 @@
-﻿using PAW3.Data.Repositories;
+﻿using PAW.Data.Models;
+using PopQuiz.Data.Models;
 
 namespace PAW.Data.Repositories;
 
@@ -13,6 +14,9 @@ public interface IRepositoryDirector
     Task<bool> UpdateManyAsync(IEnumerable<Director> entities);
     Task<bool> ExistsAsync(Director entity);
 }
-public class RepositoryDirector : RepositoryBase<Directors>, IRepositoryDirector
+public class RepositoryDirector : RepositoryBase<Director>, IRepositoryDirector
 {
+    public RepositoryDirector(HallOfFameContext context) : base(context)
+    {
+    }
 }

@@ -1,18 +1,22 @@
-﻿using PAW3.Data.Repositories;
+﻿using PAW.Data.Models;
+using PopQuiz.Data.Models;
 
 namespace PAW.Data.Repositories;
 
 public interface IRepositoryUser
 {
-    Task<bool> UpsertAsync(Users entity, bool isUpdating);
-    Task<bool> CreateAsync(Users entity);
-    Task<bool> DeleteAsync(Users entity);
-    Task<IEnumerable<Users>> ReadAsync();
-    Task<Users> FindAsync(int id);
-    Task<bool> UpdateAsync(Users entity);
-    Task<bool> UpdateManyAsync(IEnumerable<Users> entities);
-    Task<bool> ExistsAsync(Users entity);
+    Task<bool> UpsertAsync(User entity, bool isUpdating);
+    Task<bool> CreateAsync(User entity);
+    Task<bool> DeleteAsync(User entity);
+    Task<IEnumerable<User>> ReadAsync();
+    Task<User> FindAsync(int id);
+    Task<bool> UpdateAsync(User entity);
+    Task<bool> UpdateManyAsync(IEnumerable<User> entities);
+    Task<bool> ExistsAsync(User entity);
 }
-public class RepositoryUser : RepositoryBase<Users>, IRepositoryUser
+public class RepositoryUser : RepositoryBase<User>, IRepositoryUser
 {
+    public RepositoryUser(HallOfFameContext context) : base(context)
+    {
+    }
 }

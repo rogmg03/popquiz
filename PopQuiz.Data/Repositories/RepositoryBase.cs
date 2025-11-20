@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using PAW.Data.Models;
+using PopQuiz.Data.Models;
 
 
 namespace PAW.Data.Repositories;
