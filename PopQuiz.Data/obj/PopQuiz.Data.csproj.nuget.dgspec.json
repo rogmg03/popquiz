@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\UFide Local\\Software\\01-Clases\\Programacion_Avanzada_Web\\popquiz2\\popquiz\\PopQuiz.Demo\\PopQuiz.Demo.csproj": {}
+    "D:\\UFide Local\\Software\\01-Clases\\Programacion_Avanzada_Web\\popquiz2\\popquiz\\PopQuiz.Data\\PopQuiz.Data.csproj": {}
   },
   "projects": {
-    "D:\\UFide Local\\Software\\01-Clases\\Programacion_Avanzada_Web\\popquiz2\\popquiz\\PopQuiz.Demo\\PopQuiz.Demo.csproj": {
+    "D:\\UFide Local\\Software\\01-Clases\\Programacion_Avanzada_Web\\popquiz2\\popquiz\\PopQuiz.Data\\PopQuiz.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\UFide Local\\Software\\01-Clases\\Programacion_Avanzada_Web\\popquiz2\\popquiz\\PopQuiz.Demo\\PopQuiz.Demo.csproj",
-        "projectName": "PopQuiz.Demo",
-        "projectPath": "D:\\UFide Local\\Software\\01-Clases\\Programacion_Avanzada_Web\\popquiz2\\popquiz\\PopQuiz.Demo\\PopQuiz.Demo.csproj",
+        "projectUniqueName": "D:\\UFide Local\\Software\\01-Clases\\Programacion_Avanzada_Web\\popquiz2\\popquiz\\PopQuiz.Data\\PopQuiz.Data.csproj",
+        "projectName": "PopQuiz.Data",
+        "projectPath": "D:\\UFide Local\\Software\\01-Clases\\Programacion_Avanzada_Web\\popquiz2\\popquiz\\PopQuiz.Data\\PopQuiz.Data.csproj",
         "packagesPath": "C:\\Users\\r4que\\.nuget\\packages\\",
-        "outputPath": "D:\\UFide Local\\Software\\01-Clases\\Programacion_Avanzada_Web\\popquiz2\\popquiz\\PopQuiz.Demo\\obj\\",
+        "outputPath": "D:\\UFide Local\\Software\\01-Clases\\Programacion_Avanzada_Web\\popquiz2\\popquiz\\PopQuiz.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
