@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "PopQuiz.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/PopQuiz.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PopQuiz.Models.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "PopQuiz.Models/1.0.0": {
+      "type": "project",
+      "path": "../PopQuiz.Models/PopQuiz.Models.csproj",
+      "msbuildProject": "../PopQuiz.Models/PopQuiz.Models.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "PopQuiz.Models >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\lopez\\.nuget\\packages\\": {},
@@ -39,7 +58,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\lopez\\Desktop\\PograAvanzadaWeb\\Semana11\\popquiz\\PopQuiz.Models\\PopQuiz.Models.csproj": {
+              "projectPath": "C:\\Users\\lopez\\Desktop\\PograAvanzadaWeb\\Semana11\\popquiz\\PopQuiz.Models\\PopQuiz.Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
