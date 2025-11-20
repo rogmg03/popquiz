@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("PopQuiz.Demo")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("BusinessTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+adb0d4c86e461c22b42c9e240f9f55e58ef59aae")]
-[assembly: System.Reflection.AssemblyProductAttribute("PopQuiz.Demo")]
-[assembly: System.Reflection.AssemblyTitleAttribute("PopQuiz.Demo")]
+[assembly: System.Reflection.AssemblyProductAttribute("BusinessTest")]
+[assembly: System.Reflection.AssemblyTitleAttribute("BusinessTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Generado por la clase WriteCodeFragment de MSBuild.
