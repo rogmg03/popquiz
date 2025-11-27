@@ -1,3 +1,6 @@
+using Moq;
+using PAW.Data.Models;
+using PAW.Data.Repositories;
 using System.IO;
 
 namespace BusinessTest
@@ -5,7 +8,7 @@ namespace BusinessTest
     public class MovieTest
     {
 
-        private readonly IEnumerable<Movie> directors = new List<Movie>
+        /*private readonly IEnumerable<Movie> directors = new List<Movie>
             {
                 new Movie { MovieId = 1, Title = "Movie 1", ReleaseYear: 2020 , GenreID: 1, DirectorID: 2, Rating: 2.2, IsAdult: 1 },
                 new Movie { MovieId = 2, Title = "Movie 2", ReleaseYear: 1999 , GenreID: 5, DirectorID: 1, Rating: 2.2, IsAdult: 0 },
@@ -28,6 +31,6 @@ namespace BusinessTest
                 .ReturnsAsync(this.directors);
 
 
-        }
+        }*/
     }
 }

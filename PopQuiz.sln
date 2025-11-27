@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessTest", "BusinessTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopQuiz.Models", "PopQuiz.Models\PopQuiz.Models.csproj", "{CC31765E-3970-4C70-B350-198DC26A635D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopQuiz.Data", "PopQuiz.Data\PopQuiz.Data.csproj", "{B24BFF00-0C0B-4E28-B64E-36F4EAE459FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{CC31765E-3970-4C70-B350-198DC26A635D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC31765E-3970-4C70-B350-198DC26A635D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC31765E-3970-4C70-B350-198DC26A635D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B24BFF00-0C0B-4E28-B64E-36F4EAE459FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B24BFF00-0C0B-4E28-B64E-36F4EAE459FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B24BFF00-0C0B-4E28-B64E-36F4EAE459FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B24BFF00-0C0B-4E28-B64E-36F4EAE459FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

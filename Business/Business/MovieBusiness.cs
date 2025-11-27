@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PAW.Data.Models;
+using PAW.Data.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -9,14 +11,14 @@ namespace PAWQuiz.Business.BusinessLogic
 {
     public interface IMovieBusiness
     {
-        Task<List<Movie>> GetMoviesAsync();
+        Task<IEnumerable<Movie>> GetMoviesAsync();
         Task<bool> PurchaseMovieAsync(List<(int movieId, int quantity)> items, User user);
     }
     public class MovieBusiness(IRepositoryMovie repositoryMovie) : IMovieBusiness
     {
-        public async Task<List<Movie>> GetMoviesAsync()
+        public async Task<IEnumerable<Movie>> GetMoviesAsync()
         {
-            return await repositoryMovie.GetAsync();
+            return await repositoryMovie.ReadAsync();
         }
         public async Task<bool> PurchaseMovieAsync(List<(int movieId, int quantity)> items, User user)
         {
@@ -27,7 +29,7 @@ namespace PAWQuiz.Business.BusinessLogic
             // validar si existen las peliculas y cantidades validas
             foreach (var item in items)
             {
-                var movie = await repositoryMovie.FindByIdAsync(item.movieId);
+                var movie = await repositoryMovie.FindAsync(item.movieId);
                 if (movie == null)
                 {
                     return false;
@@ -37,7 +39,7 @@ namespace PAWQuiz.Business.BusinessLogic
                     return false;
                 }
                 //restriccion de edad
-                if (movie.IsAdult)
+                if ((bool) movie.IsAdult)
                 {
                     int age = CalculateAge(user.DateBirth);
                     if (age < 18)
