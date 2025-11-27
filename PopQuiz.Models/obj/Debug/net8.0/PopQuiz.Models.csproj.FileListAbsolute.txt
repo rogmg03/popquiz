@@ -1,0 +1,12 @@
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\bin\Debug\net8.0\PopQuiz.Models.deps.json
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\bin\Debug\net8.0\PopQuiz.Models.dll
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\bin\Debug\net8.0\PopQuiz.Models.pdb
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.AssemblyInfoInputs.cache
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.AssemblyInfo.cs
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.csproj.CoreCompileInputs.cache
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.sourcelink.json
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.dll
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\refint\PopQuiz.Models.dll
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.pdb
+C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\ref\PopQuiz.Models.dll
