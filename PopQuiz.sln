@@ -5,9 +5,19 @@ VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopQuiz.Demo", "PopQuiz.Demo\PopQuiz.Demo.csproj", "{7638EDAA-FAEC-420D-9B60-5ECBAC30E823}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{31AB10B0-649B-4FFF-B21F-32E87602AE46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessTest", "BusinessTest\BusinessTest.csproj", "{243EC616-6AD6-4761-A53B-0A7B40960561}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopQuiz.Models", "PopQuiz.Models\PopQuiz.Models.csproj", "{CC31765E-3970-4C70-B350-198DC26A635D}"
 EndProject
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopQuiz.MVC", "PopQuiz.MVC\PopQuiz.MVC.csproj", "{5153E513-B33B-4343-9B7D-DA0A4BF2A5AF}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopQuiz.Data", "PopQuiz.Data\PopQuiz.Data.csproj", "{B24BFF00-0C0B-4E28-B64E-36F4EAE459FD}"
+>>>>>>> main
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,17 +29,35 @@ Global
 		{7638EDAA-FAEC-420D-9B60-5ECBAC30E823}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7638EDAA-FAEC-420D-9B60-5ECBAC30E823}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7638EDAA-FAEC-420D-9B60-5ECBAC30E823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31AB10B0-649B-4FFF-B21F-32E87602AE46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31AB10B0-649B-4FFF-B21F-32E87602AE46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31AB10B0-649B-4FFF-B21F-32E87602AE46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31AB10B0-649B-4FFF-B21F-32E87602AE46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{243EC616-6AD6-4761-A53B-0A7B40960561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{243EC616-6AD6-4761-A53B-0A7B40960561}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{243EC616-6AD6-4761-A53B-0A7B40960561}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{243EC616-6AD6-4761-A53B-0A7B40960561}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC31765E-3970-4C70-B350-198DC26A635D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC31765E-3970-4C70-B350-198DC26A635D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC31765E-3970-4C70-B350-198DC26A635D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC31765E-3970-4C70-B350-198DC26A635D}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{5153E513-B33B-4343-9B7D-DA0A4BF2A5AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5153E513-B33B-4343-9B7D-DA0A4BF2A5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5153E513-B33B-4343-9B7D-DA0A4BF2A5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5153E513-B33B-4343-9B7D-DA0A4BF2A5AF}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{B24BFF00-0C0B-4E28-B64E-36F4EAE459FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B24BFF00-0C0B-4E28-B64E-36F4EAE459FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B24BFF00-0C0B-4E28-B64E-36F4EAE459FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B24BFF00-0C0B-4E28-B64E-36F4EAE459FD}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> main
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{243EC616-6AD6-4761-A53B-0A7B40960561} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EA2D437-1D02-42C4-8CFE-4C82DF8157D4}
