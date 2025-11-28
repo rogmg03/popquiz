@@ -1,10 +1,9 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using PAW.Data.Models;
 using PopQuiz.Data.Models;
 
 
-namespace PAW.Data.Repositories;
+namespace PopQuiz.Data.Repositories;
 
 /// <summary>
 /// Interface for basic repository operations.

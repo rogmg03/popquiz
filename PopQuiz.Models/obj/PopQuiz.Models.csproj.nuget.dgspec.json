@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\roger\\source\\repos\\popquiz\\PopQuiz.Models\\PopQuiz.Models.csproj": {}
+    "C:\\dev\\PAW3\\popquiz\\PopQuiz.Models\\PopQuiz.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\roger\\source\\repos\\popquiz\\PopQuiz.Models\\PopQuiz.Models.csproj": {
+    "C:\\dev\\PAW3\\popquiz\\PopQuiz.Models\\PopQuiz.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\roger\\source\\repos\\popquiz\\PopQuiz.Models\\PopQuiz.Models.csproj",
+        "projectUniqueName": "C:\\dev\\PAW3\\popquiz\\PopQuiz.Models\\PopQuiz.Models.csproj",
         "projectName": "PopQuiz.Models",
-        "projectPath": "C:\\Users\\roger\\source\\repos\\popquiz\\PopQuiz.Models\\PopQuiz.Models.csproj",
-        "packagesPath": "C:\\Users\\roger\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\roger\\source\\repos\\popquiz\\PopQuiz.Models\\obj\\",
+        "projectPath": "C:\\dev\\PAW3\\popquiz\\PopQuiz.Models\\PopQuiz.Models.csproj",
+        "packagesPath": "C:\\Users\\Jorge Alfaro\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\PAW3\\popquiz\\PopQuiz.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\roger\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jorge Alfaro\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -66,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

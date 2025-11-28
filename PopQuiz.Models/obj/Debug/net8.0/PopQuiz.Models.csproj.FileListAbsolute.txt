@@ -10,3 +10,15 @@ C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debu
 C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\refint\PopQuiz.Models.dll
 C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.pdb
 C:\Users\lopez\Desktop\PograAvanzadaWeb\Semana11\popquiz\PopQuiz.Models\obj\Debug\net8.0\ref\PopQuiz.Models.dll
+C:\dev\PAW3\popquiz\PopQuiz.Models\bin\Debug\net8.0\PopQuiz.Models.deps.json
+C:\dev\PAW3\popquiz\PopQuiz.Models\bin\Debug\net8.0\PopQuiz.Models.dll
+C:\dev\PAW3\popquiz\PopQuiz.Models\bin\Debug\net8.0\PopQuiz.Models.pdb
+C:\dev\PAW3\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\PAW3\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.AssemblyInfoInputs.cache
+C:\dev\PAW3\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.AssemblyInfo.cs
+C:\dev\PAW3\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.csproj.CoreCompileInputs.cache
+C:\dev\PAW3\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.sourcelink.json
+C:\dev\PAW3\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.dll
+C:\dev\PAW3\popquiz\PopQuiz.Models\obj\Debug\net8.0\refint\PopQuiz.Models.dll
+C:\dev\PAW3\popquiz\PopQuiz.Models\obj\Debug\net8.0\PopQuiz.Models.pdb
+C:\dev\PAW3\popquiz\PopQuiz.Models\obj\Debug\net8.0\ref\PopQuiz.Models.dll

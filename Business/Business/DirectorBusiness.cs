@@ -1,5 +1,5 @@
-﻿using PAW.Data.Models;
-using PAW.Data.Repositories;
+﻿using PopQuiz.Data.Models;
+using PopQuiz.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Business
+namespace PopQuiz.Core.Business
 {
     public interface IDirectorBusiness
     {

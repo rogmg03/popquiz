@@ -1,6 +1,6 @@
 using Moq;
-using PAW.Data.Models;
-using PAW.Data.Repositories;
+using PopQuiz.Data.Models;
+using PopQuiz.Data.Repositories;
 using System.IO;
 
 namespace BusinessTest

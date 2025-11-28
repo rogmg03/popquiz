@@ -1,7 +1,7 @@
-﻿using PAW.Data.Models;
+﻿
 using PopQuiz.Data.Models;
 
-namespace PAW.Data.Repositories;
+namespace PopQuiz.Data.Repositories;
 
 public interface IRepositoryRole
 {

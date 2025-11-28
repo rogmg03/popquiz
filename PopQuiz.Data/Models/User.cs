@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PAW.Data.Models;
+namespace PopQuiz.Data.Models;
 
 public partial class User
 {

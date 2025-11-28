@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "PopQuiz.Api\\PopQuiz.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "PopQuiz.MVC\\PopQuiz.MVC.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
