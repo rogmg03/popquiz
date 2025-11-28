@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PopQuiz.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ebfd5d561d59928031b5edfa0efaa8fc51bee923")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d91f13a901a1f664dadc1b183187c3a513e06258")]
 [assembly: System.Reflection.AssemblyProductAttribute("PopQuiz.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PopQuiz.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

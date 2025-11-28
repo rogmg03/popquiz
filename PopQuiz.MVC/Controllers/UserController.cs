@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PopQuiz.Web.Filters;
 
 namespace PopQuiz.MVC.Controllers
 {
+
     public class UserController : Controller
     {
         // GET: UserController

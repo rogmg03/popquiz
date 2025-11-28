@@ -1,5 +1,4 @@
-﻿@using PopQuiz.Web.Models.ViewModels
-@model LoginViewModel
+﻿@model LoginViewModel
 
 @{
     ViewData["Title"] = "Login";
@@ -24,7 +23,6 @@
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
             padding: 2rem;
         }
-
         .login-card {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
             backdrop-filter: blur(10px);
@@ -35,18 +33,15 @@
             width: 100%;
             max-width: 450px;
         }
-
         .login-header {
             text-align: center;
             margin-bottom: 2.5rem;
         }
-
-            .login-header h1 {
-                color: var(--primary-light);
-                text-shadow: 0 0 15px var(--primary-glow);
-                margin-bottom: 0.5rem;
-            }
-
+        .login-header h1 {
+            color: var(--primary-light);
+            text-shadow: 0 0 15px var(--primary-glow);
+            margin-bottom: 0.5rem;
+        }
         .login-icon {
             font-size: 4rem;
             color: var(--primary-color);
@@ -77,14 +72,14 @@
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
                 <div class="form-group mb-3">
-                    <label asp-for="email" class="form-label"></label>
+                    <label asp-for="Username" class="form-label"></label>
                     <div class="input-group">
                         <span class="input-group-text bg-dark border-primary">
                             <i class="fas fa-user text-primary"></i>
                         </span>
-                        <input asp-for="email" class="form-control" placeholder="Enter username or email" autocomplete="email" />
+                        <input asp-for="Username" class="form-control" placeholder="Enter username or email" autocomplete="username" />
                     </div>
-                    <span asp-validation-for="email" class="text-danger"></span>
+                    <span asp-validation-for="Username" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mb-3">

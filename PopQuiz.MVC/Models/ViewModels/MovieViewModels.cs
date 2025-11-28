@@ -1,4 +1,6 @@
-﻿namespace PopQuiz.MVC.Models.ViewModels
+﻿using PopQuiz.Data.Models;
+
+namespace PopQuiz.MVC.Models.ViewModels
 {
     public class MovieViewModels
     {
@@ -15,6 +17,10 @@
         public decimal? Rating { get; set; }
 
         public bool? IsAdult { get; set; }
+
+        public virtual Director? Director { get; set; }
+
+        public virtual Genre? Genre { get; set; }
 
     }
 }

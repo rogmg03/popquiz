@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using PopQuiz.Architecture;
 using PopQuiz.Architecture.Providers;
 using PopQuiz.MVC.Models.ViewModels;
+using PopQuiz.Web.Filters;
 
 namespace PopQuiz.MVC.Controllers
 {
+
     public class GenreController : Controller
     {
         private readonly IRestProvider _restProvider;

@@ -1,41 +1,162 @@
-﻿@model IEnumerable<PopQuiz.MVC.Models.ViewModels.GenreViewModels>
+﻿@using System.Linq
+@model IEnumerable<PopQuiz.MVC.Models.ViewModels.GenreViewModels>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Catálogo de géneros";
+    var totalGenres = Model?.Count() ?? 0;
 }
 
-<h1>Index</h1>
+<div class="movies-shell">
+    <section class="movies-hero container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="eyebrow-label">PopQuiz Genres</span>
+                <h1 class="page-title">Explorá el catálogo de géneros.</h1>
+                <p class="page-subtitle">
+                    Navegá, buscá y filtrá todos los géneros disponibles.
+                    Esta vista utiliza datos de tu API conectada mediante el controlador.
+                </p>
+            </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.GenreId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.GenreId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                <div class="movies-metrics">
+                    <span class="movies-count-badge">
+                        <span id="filteredGenresCount">@totalGenres</span> /
+                        <span id="totalGenresCount">@totalGenres</span> géneros
+                    </span>
+                    <p class="movies-metrics-caption">
+                        Datos provenientes de tu API / servicios REST.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buscador -->
+        <div class="movie-search-card shadow-lg">
+            <div class="movie-search-input-wrapper">
+                <span class="movie-search-icon" aria-hidden="true">🔍</span>
+                <input id="genreSearchInput"
+                       type="search"
+                       class="form-control form-control-lg movie-search-input"
+                       placeholder="Buscar género por nombre..."
+                       autocomplete="off" />
+            </div>
+            <p class="movie-search-help">
+                Escribí una palabra clave. El listado se filtra automáticamente.
+            </p>
+        </div>
+    </section>
+
+    <section class="movies-list-section container">
+
+        @if (totalGenres == 0)
+        {
+            <div class="empty-state-card">
+                <h2 class="empty-state-title">Todavía no hay géneros registrados</h2>
+                <p class="empty-state-text">
+                    Cuando la API devuelva resultados, los verás aquí como tarjetas.
+                </p>
+            </div>
+        }
+        else
+        {
+            <div id="genresGrid" class="movie-grid">
+
+                @foreach (var genre in Model)
+                {
+                    var searchTokens = genre.Name;
+
+                    <article class="movie-card"
+                             data-search="@searchTokens">
+                        <div class="movie-card-poster genre-card-poster">
+                            <div class="movie-poster-gradient"></div>
+                            <div class="movie-poster-initial">
+                                @(!string.IsNullOrWhiteSpace(genre.Name)
+                                                        ? genre.Name.Trim()[0]
+                                                        : '?')
+                    </div>
+                </div>
+
+                        <div class="movie-card-body">
+                            <header class="movie-card-header">
+                                <h2 class="movie-card-title" title="@genre.Name">
+                                    @genre.Name
+                                </h2>
+                            </header>
+                        </div>
+                    </article>
+                        }
+            </div>
+
+            <div id="noGenresFound" class="empty-state-card d-none">
+                <h2 class="empty-state-title">No encontramos coincidencias</h2>
+                <p class="empty-state-text">
+                    Probá con otra palabra clave.
+                </p>
+            </div>
+        }
+    </section>
+</div>
+
+@section Scripts
+{
+    <script>
+        (function () {
+            'use strict';
+
+            document.body.classList.remove('login-page');
+            document.body.classList.add('movies-page');
+
+            var searchInput = document.getElementById('genreSearchInput');
+            var cardsContainer = document.getElementById('genresGrid');
+            var cards = [];
+
+            if (cardsContainer) {
+                cards = Array.prototype.slice.call(
+                    cardsContainer.querySelectorAll('.movie-card')
+                );
+            }
+
+            var emptyState = document.getElementById('noGenresFound');
+            var totalCountSpan = document.getElementById('totalGenresCount');
+            var filteredCountSpan = document.getElementById('filteredGenresCount');
+            var totalCount = cards.length;
+
+            if (totalCountSpan)
+                totalCountSpan.textContent = totalCount;
+
+            function normalize(text) {
+                return (text || '')
+                    .toString()
+                    .toLowerCase()
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '');
+            }
+
+            function applyFilter() {
+                if (!cards.length) return;
+
+                var term = searchInput ? normalize(searchInput.value) : '';
+                var visibleCount = 0;
+
+                cards.forEach(function (card) {
+                    var haystack = normalize(card.getAttribute('data-search'));
+                    var isVisible = !term || haystack.indexOf(term) !== -1;
+                    card.style.display = isVisible ? '' : 'none';
+                    if (isVisible) visibleCount++;
+                });
+
+                if (emptyState)
+                    emptyState.classList.toggle('d-none', visibleCount !== 0);
+
+                if (filteredCountSpan)
+                    filteredCountSpan.textContent = visibleCount;
+            }
+
+            if (searchInput)
+                searchInput.addEventListener('input', applyFilter);
+
+            applyFilter();
+        })();
+    </script>
 }
-    </tbody>
-</table>

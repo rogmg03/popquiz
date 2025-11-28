@@ -11,7 +11,10 @@ namespace PopQuiz.Core.BusinessLogic
     public interface IUserBusiness
     {
         Task<IEnumerable<User>> GetUsers(int? id);
-        Task<bool> GetUserWithCredentials(string email, string password);
+
+        Task<bool> SaveUserAsync(User user);
+
+        Task<bool> DeleteUserAsync(int id);
 
     }
 
@@ -23,11 +26,21 @@ namespace PopQuiz.Core.BusinessLogic
                 ? await repositoryUser.ReadAsync()
                 : [await repositoryUser.FindAsync((int)id)];
         }
-        public async Task<bool> GetUserWithCredentials(string email, string password)
+
+        /// <inheritdoc />
+        public async Task<bool> SaveUserAsync(User user)
         {
-            var users = await repositoryUser.ReadAsync();
-            var user = users.FirstOrDefault(u => u.Email == email && u.Password == password);
-            return user != null;
+            return await repositoryUser.UpdateAsync(user);
         }
+
+        /// <inheritdoc />
+        public async Task<bool> DeleteUserAsync(int id)
+        {
+            var user = await repositoryUser.FindAsync(id);
+            if (user == null) return false;
+            return await repositoryUser.DeleteAsync(user);
+        }
+
+        
     }
 }

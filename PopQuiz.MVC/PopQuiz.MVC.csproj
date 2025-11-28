@@ -7,19 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Login\Login.cshtml" />
+    <Content Remove="Views\Login\difIndez.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Login\Login.cshtml" />
+    <None Include="Views\Login\difIndez.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.22" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.22" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.22">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PopQuiz.Architecture\PopQuiz.Architecture.csproj" />
+    <ProjectReference Include="..\PopQuiz.Data\PopQuiz.Data.csproj" />
     <ProjectReference Include="..\PopQuiz.Models\PopQuiz.Models.csproj" />
   </ItemGroup>
 

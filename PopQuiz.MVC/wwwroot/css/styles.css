@@ -556,3 +556,23 @@ body.login-page .container {
     padding-inline: 0.9rem;
   }
 }
+
+html, body {
+    height: 100%;
+}
+
+footer {
+    position: static !important;
+}
+
+
+input,
+input:focus,
+input[type="text"]:focus,
+input[type="search"]:focus {
+    color: white !important;
+}
+
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.6) !important; /* opcional */
+    }

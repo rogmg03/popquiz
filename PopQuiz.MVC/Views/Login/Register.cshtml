@@ -1,9 +1,9 @@
-﻿@using PopQuiz.Web.Models.ViewModels
-@model LoginViewModel
+@using PopQuiz.MVC.Models.ViewModels
+@model RegisterViewModels
 
 @{
-    ViewData["Title"] = "Login";
-    Layout = null; // No layout for login page
+    ViewData["Title"] = "Register";
+    Layout = null; // No layout for register page
 }
 
 <!DOCTYPE html>
@@ -24,7 +24,6 @@
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
             padding: 2rem;
         }
-
         .login-card {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
             backdrop-filter: blur(10px);
@@ -33,20 +32,17 @@
             border: 1px solid rgba(14, 165, 233, 0.3);
             padding: 3rem;
             width: 100%;
-            max-width: 450px;
+            max-width: 500px;
         }
-
         .login-header {
             text-align: center;
             margin-bottom: 2.5rem;
         }
-
-            .login-header h1 {
-                color: var(--primary-light);
-                text-shadow: 0 0 15px var(--primary-glow);
-                margin-bottom: 0.5rem;
-            }
-
+        .login-header h1 {
+            color: var(--primary-light);
+            text-shadow: 0 0 15px var(--primary-glow);
+            margin-bottom: 0.5rem;
+        }
         .login-icon {
             font-size: 4rem;
             color: var(--primary-color);
@@ -60,10 +56,10 @@
         <div class="login-card">
             <div class="login-header">
                 <div class="login-icon">
-                    <i class="fas fa-user-shield"></i>
+                    <i class="fas fa-user-plus"></i>
                 </div>
-                <h1>PAW3 Enterprise</h1>
-                <p class="text-muted">Sign in to your account</p>
+                <h1>Create Account</h1>
+                <p class="text-muted">Sign up for PAW3 Enterprise</p>
             </div>
 
             @if (ViewBag.Error != null)
@@ -73,18 +69,39 @@
                 </div>
             }
 
-            <form asp-action="Index" method="post">
+            <form asp-action="Register" method="post">
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
-
+                
                 <div class="form-group mb-3">
-                    <label asp-for="email" class="form-label"></label>
+                    <label asp-for="Name" class="form-label"></label>
                     <div class="input-group">
                         <span class="input-group-text bg-dark border-primary">
                             <i class="fas fa-user text-primary"></i>
                         </span>
-                        <input asp-for="email" class="form-control" placeholder="Enter username or email" autocomplete="email" />
+                        <input asp-for="Name" class="form-control" placeholder="Enter username" autocomplete="username" />
                     </div>
-                    <span asp-validation-for="email" class="text-danger"></span>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="LastName" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-dark border-primary">
+                            <i class="fas fa-user text-primary"></i>
+                        </span>
+                        <input asp-for="LastName" class="form-control" placeholder="Enter LastName" autocomplete="LastName" />
+                    </div>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-dark border-primary">
+                            <i class="fas fa-envelope text-primary"></i>
+                        </span>
+                        <input asp-for="Email" class="form-control" placeholder="Enter email address" autocomplete="email" />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mb-3">
@@ -93,39 +110,33 @@
                         <span class="input-group-text bg-dark border-primary">
                             <i class="fas fa-lock text-primary"></i>
                         </span>
-                        <input asp-for="Password" class="form-control" placeholder="Enter password" autocomplete="current-password" />
+                        <input asp-for="Password" class="form-control" placeholder="Enter password" autocomplete="new-password" />
                     </div>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mb-4">
-                    <div class="form-check">
-                        <input type="checkbox" name="RememberMe" value="true" class="form-check-input" id="RememberMe" />
-                        <input type="hidden" name="RememberMe" value="false" />
-                        <label class="form-check-label" for="RememberMe">
-                            Remember me
-                        </label>
+                    <label asp-for="ConfirmPassword" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-dark border-primary">
+                            <i class="fas fa-lock text-primary"></i>
+                        </span>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm password" autocomplete="new-password" />
                     </div>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
 
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-primary btn-lg">
-                        <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                        <i class="fas fa-user-plus me-2"></i>Create Account
                     </button>
                 </div>
 
-                @if (ViewBag.SuccessMessage != null)
-                {
-                    <div class="alert alert-success" role="alert">
-                        <i class="fas fa-check-circle me-2"></i>@ViewBag.SuccessMessage
-                    </div>
-                }
-
                 <div class="text-center">
                     <p class="text-muted mb-0">
-                        Don't have an account?
-                        <a asp-action="Register" class="text-primary text-decoration-none">
-                            <i class="fas fa-user-plus me-1"></i>Register
+                        Already have an account? 
+                        <a asp-action="Index" class="text-primary text-decoration-none">
+                            <i class="fas fa-sign-in-alt me-1"></i>Sign In
                         </a>
                     </p>
                 </div>

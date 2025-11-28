@@ -1,9 +1,11 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PopQuiz.MVC.Models;
-using System.Diagnostics;
+using PopQuiz.Web.Filters;
 
 namespace PopQuiz.MVC.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -18,29 +18,48 @@ namespace PopQuiz.Api.Controllers
             return Ok(user);
         }
 
-        // GET api/<UserApiController>/5
+        // GET api/UserApiController/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<User>> Get(int id)
         {
-            return "value";
+            var users = await userBusiness.GetUsers(id);
+            var user = users.FirstOrDefault();
+            if (user == null)
+                return NotFound();
+            return Ok(user);
         }
 
-        // POST api/<UserApiController>
+        // POST api/UserApiController
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<bool>> Post([FromBody] User user)
         {
+            var result = await userBusiness.SaveUserAsync(user);
+            if (result)
+                return CreatedAtAction(nameof(Get), new { id = user.UserId }, user);
+            return BadRequest();
         }
 
-        // PUT api/<UserApiController>/5
+        // PUT api/UserApiController/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<bool>> Put(int id, [FromBody] User user)
         {
+            if (id != user.UserId)
+                return BadRequest();
+
+            var result = await userBusiness.SaveUserAsync(user);
+            if (result)
+                return Ok(result);
+            return NotFound();
         }
 
-        // DELETE api/<UserApiController>/5
+        // DELETE api/UserApiController/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<bool>> Delete(int id)
         {
+            var result = await userBusiness.DeleteUserAsync(id);
+            if (result)
+                return Ok(result);
+            return NotFound();
         }
     }
 }
