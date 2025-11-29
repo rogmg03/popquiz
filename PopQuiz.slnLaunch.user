@@ -7,7 +7,7 @@
         "Action": "Start"
       },
       {
-        "Path": "PopQuiz.MVC\\PopQuiz.MVC.csproj",
+        "Path": "PopQuiz.MVCs\\PopQuiz.MVCs.csproj",
         "Action": "Start"
       }
     ]

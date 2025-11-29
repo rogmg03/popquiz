@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopQuiz.Architecture", "Pop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopQuiz.Api", "PopQuiz.Api\PopQuiz.Api.csproj", "{FB5D30F2-BBAE-4D57-8FEF-8FF2D809DFDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopQuiz.MVCs", "PopQuiz.MVCs\PopQuiz.MVCs.csproj", "{F6DDFE73-FDFF-4A7F-A84F-B2F771516AAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{FB5D30F2-BBAE-4D57-8FEF-8FF2D809DFDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB5D30F2-BBAE-4D57-8FEF-8FF2D809DFDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB5D30F2-BBAE-4D57-8FEF-8FF2D809DFDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6DDFE73-FDFF-4A7F-A84F-B2F771516AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6DDFE73-FDFF-4A7F-A84F-B2F771516AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6DDFE73-FDFF-4A7F-A84F-B2F771516AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6DDFE73-FDFF-4A7F-A84F-B2F771516AAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

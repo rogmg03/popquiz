@@ -1,0 +1,280 @@
+﻿@using System.Linq
+
+
+@model IEnumerable<PopQuiz.MVCs.Models.ViewModels.MovieViewModels>
+
+@{
+
+    ViewData["Title"] = "Catálogo de películas";
+
+    var totalMovies = Model?.Count() ?? 0;
+
+}
+
+<div class="movies-shell">
+    <section class="movies-hero container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="eyebrow-label">PopQuiz Movies</span>
+                <h1 class="page-title">Explorá el catálogo de películas.</h1>
+                <p class="page-subtitle">
+
+                    Buscá, filtrá y encontrá rápidamente cualquier título disponible en tu API
+
+                    de películas. Este índice está pensado para conectarse a tus servicios
+
+                    REST desde el controlador.
+                </p>
+            </div>
+
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                <div class="movies-metrics">
+                    <span class="movies-count-badge">
+                        <span id="filteredMoviesCount">@totalMovies</span> /
+                        <span id="totalMoviesCount">@totalMovies</span> películas
+                    </span>
+                    <p class="movies-metrics-caption">
+
+                        Datos provenientes de tus servicios / APIs de la misma solución.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buscador -->
+        <div class="movie-search-card shadow-lg">
+            <div class="movie-search-input-wrapper">
+                <span class="movie-search-icon" aria-hidden="true">🔍</span>
+                <input id="movieSearchInput"
+                       type="search"
+                       class="form-control form-control-lg movie-search-input"
+                       placeholder="Buscar por título, director, género o año..."
+                       autocomplete="off" />
+            </div>
+            <p class="movie-search-help">
+
+                Escribí al menos una palabra clave. El listado se filtra automáticamente mientras escribís.
+            </p>
+        </div>
+    </section>
+
+    <section class="movies-list-section container">
+
+        @if (totalMovies == 0)
+
+        {
+            <div class="empty-state-card">
+                <h2 class="empty-state-title">Todavía no hay películas registradas</h2>
+                <p class="empty-state-text">
+
+                    Cuando tu API devuelva resultados, los verás aquí como tarjetas con la información
+
+                    básica de cada título (año, género, director y rating).
+                </p>
+            </div>
+
+        }
+
+        else
+
+        {
+            <div id="moviesGrid" class="movie-grid">
+
+                @foreach (var movie in Model)
+
+                {
+
+                    var ratingText = movie.Rating.HasValue ? movie.Rating.Value.ToString("0.0") : "N/D";
+
+                    var releaseYear = movie.ReleaseYear != 0 ? movie.ReleaseYear.ToString() : "Sin año";
+
+                    var genreName = movie.Genre?.Name ?? "Sin género";
+
+                    var directorName = movie.Director?.FullName ?? "Director no asignado";
+
+                    var searchTokens = string.Join(" ",
+
+                    movie.Title,
+
+                    directorName,
+
+                    genreName,
+
+                    releaseYear,
+
+                    ratingText
+
+                    );
+
+                    <article class="movie-card"
+                             data-search="@searchTokens">
+                        <div class="movie-card-poster">
+                            <div class="movie-poster-gradient"></div>
+                            <div class="movie-poster-initial">
+
+                                @(!string.IsNullOrWhiteSpace(movie.Title)
+
+                                                        ? movie.Title.Trim()[0]
+
+                                                        : '?')
+                    </div>
+                    <span class="movie-card-year">@releaseYear</span>
+                </div>
+
+                        <div class="movie-card-body">
+                            <header class="movie-card-header">
+                                <h2 class="movie-card-title" title="@movie.Title">
+
+                                    @movie.Title
+                                </h2>
+                                <span class="movie-card-rating" title="Rating promedio">
+                                    <span class="movie-card-rating-icon">★</span>
+                                    <span class="movie-card-rating-value">@ratingText</span>
+                                </span>
+                            </header>
+
+                            <dl class="movie-card-meta">
+                                <div class="movie-card-meta-row">
+                                    <dt>Género</dt>
+                                    <dd>@genreName</dd>
+                                </div>
+                                <div class="movie-card-meta-row">
+                                    <dt>Director</dt>
+                                    <dd>@directorName</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </article>
+
+                        }
+            </div>
+
+            <div id="noMoviesFound" class="empty-state-card d-none">
+                <h2 class="empty-state-title">No encontramos coincidencias</h2>
+                <p class="empty-state-text">
+
+                    Probá con otra palabra clave: parte del título, el apellido del director
+
+                    o el año de estreno.
+                </p>
+            </div>
+
+        }
+    </section>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        (function () {
+
+            'use strict';
+
+            // Marcamos el body para aplicar estilos de página de películas
+
+            document.body.classList.remove('login-page');
+
+            document.body.classList.add('movies-page');
+
+            var searchInput = document.getElementById('movieSearchInput');
+
+            var cardsContainer = document.getElementById('moviesGrid');
+
+            var cards = [];
+
+            if (cardsContainer) {
+
+                cards = Array.prototype.slice.call(
+
+                    cardsContainer.querySelectorAll('.movie-card')
+
+                );
+
+            }
+
+            var emptyState = document.getElementById('noMoviesFound');
+
+            var totalCountSpan = document.getElementById('totalMoviesCount');
+
+            var filteredCountSpan = document.getElementById('filteredMoviesCount');
+
+            var totalCount = cards.length;
+
+            if (totalCountSpan) {
+
+                totalCountSpan.textContent = totalCount;
+
+            }
+
+            function normalize(text) {
+
+                return (text || '')
+
+                    .toString()
+
+                    .toLowerCase()
+
+                    .normalize('NFD')
+
+                    .replace(/[\u0300-\u036f]/g, '');
+
+            }
+
+            function applyFilter() {
+
+                if (!cards.length) {
+
+                    return;
+
+                }
+
+                var term = searchInput ? normalize(searchInput.value) : '';
+
+                var visibleCount = 0;
+
+                cards.forEach(function (card) {
+
+                    var haystack = normalize(card.getAttribute('data-search'));
+
+                    var isVisible = !term || haystack.indexOf(term) !== -1;
+
+                    card.style.display = isVisible ? '' : 'none';
+
+                    if (isVisible) {
+
+                        visibleCount++;
+
+                    }
+
+                });
+
+                if (emptyState) {
+
+                    emptyState.classList.toggle('d-none', visibleCount !== 0);
+
+                }
+
+                if (filteredCountSpan) {
+
+                    filteredCountSpan.textContent = visibleCount;
+
+                }
+
+            }
+
+            if (searchInput) {
+
+                searchInput.addEventListener('input', applyFilter);
+
+            }
+
+            // Estado inicial
+
+            applyFilter();
+
+        })();
+    </script>
+
+}
+

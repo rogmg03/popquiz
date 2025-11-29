@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-PopQuiz.MVCs-3bf41bb4-993b-42a1-8285-15a96e381192</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.20" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PopQuiz.Api\PopQuiz.Api.csproj" />
+    <ProjectReference Include="..\PopQuiz.Architecture\PopQuiz.Architecture.csproj" />
+    <ProjectReference Include="..\PopQuiz.Core\PopQuiz.Core.csproj" />
+    <ProjectReference Include="..\PopQuiz.Data\PopQuiz.Data.csproj" />
+    <ProjectReference Include="..\PopQuiz.Models\PopQuiz.Models.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,167 @@
+﻿@using System.Linq
+@model IEnumerable<PopQuiz.MVCs.Models.ViewModels.DirectorViewModels>
+
+@{
+    ViewData["Title"] = "Catálogo de Directores";
+    var totalDirectors = Model?.Count() ?? 0;
+}
+
+<div class="movies-shell">
+    <section class="movies-hero container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="eyebrow-label">PopQuiz Directors</span>
+                <h1 class="page-title">Explorá el catálogo de directores.</h1>
+                <p class="page-subtitle">
+                    Buscá y filtrá todos los directores registrados en la base de datos.
+                    Esta vista usa datos de tu API conectada mediante el controlador.
+                </p>
+            </div>
+
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                <div class="movies-metrics">
+                    <span class="movies-count-badge">
+                        <span id="filteredDirectorsCount">@totalDirectors</span> /
+                        <span id="totalDirectorsCount">@totalDirectors</span> directores
+                    </span>
+                    <p class="movies-metrics-caption">
+                        Datos provenientes de tu API / servicios REST.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buscador -->
+        <div class="movie-search-card shadow-lg">
+            <div class="movie-search-input-wrapper">
+                <span class="movie-search-icon" aria-hidden="true">🔍</span>
+                <input id="directorSearchInput"
+                       type="search"
+                       class="form-control form-control-lg movie-search-input"
+                       placeholder="Buscar director por nombre..."
+                       autocomplete="off" />
+            </div>
+            <p class="movie-search-help">
+                Escribí una palabra clave. El listado se filtra automáticamente.
+            </p>
+        </div>
+    </section>
+
+    <section class="movies-list-section container">
+
+        @if (totalDirectors == 0)
+        {
+            <div class="empty-state-card">
+                <h2 class="empty-state-title">Todavía no hay directores registrados</h2>
+                <p class="empty-state-text">
+                    Cuando la API devuelva resultados, aparecerán aquí.
+                </p>
+            </div>
+        }
+        else
+        {
+            <div id="directorsGrid" class="movie-grid">
+
+                @foreach (var director in Model)
+                {
+                    var searchTokens = director.FullName;
+
+                    <article class="movie-card" data-search="@searchTokens">
+
+                        <div class="movie-card-poster director-card-poster">
+                            <div class="movie-poster-gradient"></div>
+                            <div class="movie-poster-initial">
+                                @(!string.IsNullOrWhiteSpace(director.FullName)
+                                                        ? director.FullName.Trim()[0]
+                                                        : '?')
+                    </div>
+
+                            <span class="movie-card-year">ID @director.DirectorId</span>
+                        </div>
+
+                        <div class="movie-card-body">
+                            <header class="movie-card-header">
+                                <h2 class="movie-card-title" title="@director.FullName">
+                                    @director.FullName
+                                </h2>
+                            </header>
+
+                        </div>
+
+                    </article>
+                        }
+            </div>
+
+            <div id="noDirectorsFound" class="empty-state-card d-none">
+                <h2 class="empty-state-title">No encontramos coincidencias</h2>
+                <p class="empty-state-text">
+                    Probá buscar por apellido o parte del nombre.
+                </p>
+            </div>
+        }
+    </section>
+</div>
+
+@section Scripts
+{
+    <script>
+        (function () {
+            'use strict';
+
+            document.body.classList.remove('login-page');
+            document.body.classList.add('movies-page');
+
+            var searchInput = document.getElementById('directorSearchInput');
+            var cardsContainer = document.getElementById('directorsGrid');
+            var cards = [];
+
+            if (cardsContainer) {
+                cards = Array.prototype.slice.call(
+                    cardsContainer.querySelectorAll('.movie-card')
+                );
+            }
+
+            var emptyState = document.getElementById('noDirectorsFound');
+            var totalCountSpan = document.getElementById('totalDirectorsCount');
+            var filteredCountSpan = document.getElementById('filteredDirectorsCount');
+            var totalCount = cards.length;
+
+            if (totalCountSpan)
+                totalCountSpan.textContent = totalCount;
+
+            function normalize(text) {
+                return (text || '')
+                    .toString()
+                    .toLowerCase()
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '');
+            }
+
+            function applyFilter() {
+                if (!cards.length) return;
+
+                var term = searchInput ? normalize(searchInput.value) : '';
+                var visibleCount = 0;
+
+                cards.forEach(function (card) {
+                    var haystack = normalize(card.getAttribute('data-search'));
+                    var isVisible = !term || haystack.indexOf(term) !== -1;
+
+                    card.style.display = isVisible ? '' : 'none';
+                    if (isVisible) visibleCount++;
+                });
+
+                if (emptyState)
+                    emptyState.classList.toggle('d-none', visibleCount !== 0);
+
+                if (filteredCountSpan)
+                    filteredCountSpan.textContent = visibleCount;
+            }
+
+            if (searchInput)
+                searchInput.addEventListener('input', applyFilter);
+
+            applyFilter();
+        })();
+    </script>
+}
