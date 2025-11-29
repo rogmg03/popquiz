@@ -19,7 +19,7 @@ public partial class Movie
 
     public bool? IsAdult { get; set; }
 
-    public virtual Director? Director { get; set; }
+    public  Director? Director { get; set; }
 
-    public virtual Genre? Genre { get; set; }
+    public  Genre? Genre { get; set; }
 }

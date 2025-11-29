@@ -72,7 +72,7 @@ app.MapGet("/", async context =>
     // Si el usuario esta autenticado, lo manda al Home
     if (context.User?.Identity != null && context.User.Identity.IsAuthenticated)
     {
-        context.Response.Redirect("/Home/Index");
+        context.Response.Redirect("/Movie/Index");
     }
     else
     {

@@ -10,14 +10,18 @@ namespace PopQuiz.Core.BusinessLogic
 {
     public interface IMovieBusiness
     {
-        Task<IEnumerable<Movie>> GetMoviesAsync();
+        Task<IEnumerable<Movie>> GetMoviesAsync(int? id);
         Task<bool> PurchaseMovieAsync(List<(int movieId, int quantity)> items, User user);
     }
     public class MovieBusiness(IRepositoryMovie repositoryMovie) : IMovieBusiness
     {
-        public async Task<IEnumerable<Movie>> GetMoviesAsync()
+        public async Task<IEnumerable<Movie>> GetMoviesAsync(int? id)
         {
-            return await repositoryMovie.ReadAsync();
+
+            return id == null
+            ? await repositoryMovie.ReadAsync()
+            : [await repositoryMovie.FindAsync((int)id)];
+
         }
         public async Task<bool> PurchaseMovieAsync(List<(int movieId, int quantity)> items, User user)
         {

@@ -14,7 +14,7 @@ namespace PopQuiz.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movie>>> Get()
         {
-            var movies = await movieBusiness.GetMoviesAsync();
+            var movies = await movieBusiness.GetMoviesAsync(null);
             return Ok(movies);
         }
 

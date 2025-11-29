@@ -3,70 +3,173 @@
 @inject RoleManager<IdentityRole> RoleManager
 @inject UserManager<IdentityUser> UserManager
 
-<div class="roles-container">
-    <div class="card roles-card shadow">
-        <div class="card-header text-white">
-            <h3 class="m-0">Administrar Roles de Usuarios</h3>
+@{
+    ViewData["Title"] = "Administración de Roles";
+    var totalUsers = Model?.Count() ?? 0;
+}
+
+<div class="movies-shell">
+    <!-- HERO -->
+    <section class="movies-hero container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="eyebrow-label">PopQuiz Admin Panel</span>
+                <h1 class="page-title">Administrar Roles de Usuarios</h1>
+                <p class="page-subtitle">
+                    Asigná y quitá roles de los usuarios registrados.
+                    Vista generada usando estilo de catálogo modernizado.
+                </p>
+            </div>
+
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                <div class="movies-metrics">
+                    <span class="movies-count-badge">
+                        <span id="filteredUsersCount">@totalUsers</span> /
+                        <span id="totalUsersCount">@totalUsers</span> usuarios
+                    </span>
+                    <p class="movies-metrics-caption">Gestión basada en ASP.NET Core Identity.</p>
+                </div>
+            </div>
         </div>
 
-        <div class="card-body">
-            <table class="table table-hover align-middle roles-table">
-                <thead>
-                    <tr>
-                        <th>Email</th>
-                        <th>Roles actuales</th>
-                        <th>Asignar / Quitar Rol</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var user in Model)
-                    {
-                        var roles = await UserManager.GetRolesAsync(user);
+        <!-- Buscador -->
+        <div class="movie-search-card shadow-lg">
+            <div class="movie-search-input-wrapper">
+                <span class="movie-search-icon" aria-hidden="true">🔍</span>
+                <input id="userSearchInput"
+                       type="search"
+                       class="form-control form-control-lg movie-search-input"
+                       placeholder="Buscar usuario por email..."
+                       autocomplete="off" />
+            </div>
+            <p class="movie-search-help">El listado se filtra automáticamente.</p>
+        </div>
+    </section>
+
+    <!-- LISTADO -->
+    <section class="movies-list-section container">
+
+        @if (totalUsers == 0)
+        {
+            <div class="empty-state-card">
+                <h2 class="empty-state-title">No hay usuarios registrados</h2>
+                <p class="empty-state-text">Cuando Identity registre usuarios, aparecerán aquí.</p>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive shadow-lg rounded-4">
+                <table class="table table-hover align-middle roles-table">
+                    <thead class="table-dark">
                         <tr>
-                            <td>@user.Email</td>
-                            <td>
-                                @if (roles.Any())
-                                {
-                                    <span class="badge bg-primary">@string.Join(", ", roles)</span>
-                                }
-                                else
-                                {
-                                    <span class="text-muted">Sin roles</span>
-                                }
-                            </td>
-                            <td>
-                                <div class="d-flex gap-2">
-
-                                    <!-- Asignar Rol -->
-                                    <form asp-action="AssignRole" method="post" class="d-flex gap-2 align-items-center">
-                                        <input type="hidden" name="userId" value="@user.Id" />
-                                        <select name="roleName" class="form-select form-select-sm role-select">
-                                            @foreach (var role in RoleManager.Roles)
-                                            {
-                                                <option value="@role.Name">@role.Name</option>
-                                            }
-                                        </select>
-                                        <button type="submit" class="btn btn-sm btn-assign">Asignar</button>
-                                    </form>
-
-                                    <!-- Quitar Rol -->
-                                    <form asp-action="RemoveRole" method="post" class="d-flex gap-2 align-items-center">
-                                        <input type="hidden" name="userId" value="@user.Id" />
-                                        <select name="roleName" class="form-select form-select-sm role-select">
-                                            @foreach (var role in roles)
-                                            {
-                                                <option value="@role">@role</option>
-                                            }
-                                        </select>
-                                        <button type="submit" class="btn btn-sm btn-remove">Quitar</button>
-                                    </form>
-
-                                </div>
-                            </td>
+                            <th>Email</th>
+                            <th>Roles actuales</th>
+                            <th>Administrar</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        @foreach (var user in Model)
+                        {
+                            var roles = await UserManager.GetRolesAsync(user);
+
+                            <tr class="user-row" data-search="@user.Email">
+                                <td>@user.Email</td>
+
+                                <td>
+                                    @if (roles.Any())
+                                    {
+                                        <span class="badge bg-primary">@string.Join(", ", roles)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Sin roles</span>
+                                    }
+                                </td>
+
+                                <td>
+                                    <div class="d-flex gap-2">
+
+                                        <!-- Asignar Rol -->
+                                        <form asp-action="AssignRole" method="post" class="d-flex gap-2 align-items-center">
+                                            <input type="hidden" name="userId" value="@user.Id" />
+                                            <select name="roleName" class="form-select form-select-sm">
+                                                @foreach (var role in RoleManager.Roles)
+                                                {
+                                                    <option value="@role.Name">@role.Name</option>
+                                                }
+                                            </select>
+                                            <button type="submit" class="btn btn-success btn-sm">Asignar</button>
+                                        </form>
+
+                                        <!-- Quitar Rol -->
+                                        <form asp-action="RemoveRole" method="post" class="d-flex gap-2 align-items-center">
+                                            <input type="hidden" name="userId" value="@user.Id" />
+                                            <select name="roleName" class="form-select form-select-sm">
+                                                @foreach (var role in roles)
+                                                {
+                                                    <option value="@role">@role</option>
+                                                }
+                                            </select>
+                                            <button type="submit" class="btn btn-danger btn-sm">Quitar</button>
+                                        </form>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="noUsersFound" class="empty-state-card d-none">
+                <h2 class="empty-state-title">No encontramos coincidencias</h2>
+                <p class="empty-state-text">Probá buscar usando parte del correo.</p>
+            </div>
+        }
+    </section>
 </div>
+
+@section Scripts {
+    <script>
+        (function () {
+            'use strict';
+
+            document.body.classList.remove('login-page');
+            document.body.classList.add('movies-page');
+
+            var searchInput = document.getElementById('userSearchInput');
+            var rows = Array.from(document.querySelectorAll('.user-row'));
+            var totalSpan = document.getElementById('totalUsersCount');
+            var filteredSpan = document.getElementById('filteredUsersCount');
+            var emptyState = document.getElementById('noUsersFound');
+
+            var total = rows.length;
+            totalSpan.textContent = total;
+
+            function normalize(text) {
+                return (text || '')
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "");
+            }
+
+            function applyFilter() {
+                var term = normalize(searchInput.value);
+                var visible = 0;
+
+                rows.forEach(r => {
+                    var value = normalize(r.getAttribute("data-search"));
+                    var isVisible = !term || value.includes(term);
+                    r.style.display = isVisible ? "" : "none";
+                    if (isVisible) visible++;
+                });
+
+                filteredSpan.textContent = visible;
+                emptyState.classList.toggle("d-none", visible !== 0);
+            }
+
+            searchInput.addEventListener("input", applyFilter);
+            applyFilter();
+        })();
+    </script>
+}

@@ -16,6 +16,9 @@ namespace PopQuiz.Models.DTOs
         [JsonPropertyName("directorId")] public int? DirectorID { get; set; }
         [JsonPropertyName("rating")] public decimal? Rating { get; set; }
 
+        public string? DirectorName { get; set; }
+        public string? GenreName { get; set; }
+
         public GenresDTO? Genre { get; set; }
         public DirectorsDTO? Director { get; set; }
     }

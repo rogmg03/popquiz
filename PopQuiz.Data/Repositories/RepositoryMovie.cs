@@ -10,8 +10,10 @@ public interface IRepositoryMovie
     Task<bool> CreateAsync(Movie entity);
     Task<bool> DeleteAsync(Movie entity);
     Task<IEnumerable<Movie>> ReadAsync();
+
     Task<Movie> FindAsync(int id);
     Task<bool> UpdateAsync(Movie entity);
+ 
     Task<bool> UpdateManyAsync(IEnumerable<Movie> entities);
     Task<bool> ExistsAsync(Movie entity);
     /// <summary>
@@ -26,6 +28,8 @@ public interface IRepositoryMovie
     /// <param name="title"></param>
     /// <returns></returns>
     Task<IEnumerable<Movie>> SearchByTitleWithDetailsAsync(string title);
+
+
 }
 public class RepositoryMovie : RepositoryBase<Movie>, IRepositoryMovie
 {
@@ -56,4 +60,6 @@ public class RepositoryMovie : RepositoryBase<Movie>, IRepositoryMovie
             .Where(m => m.Title.Contains(title))
             .ToListAsync();
     }
+
+    
 }
