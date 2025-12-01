@@ -26,8 +26,15 @@
                     REST desde el controlador.
                 </p>
             </div>
-
+            
             <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-controller="Movie" asp-action="Create" class="btn btn-primary btn-lg">
+                        + Agregar película
+                    </a>
+                }
+
                 <div class="movies-metrics">
                     <span class="movies-count-badge">
                         <span id="filteredMoviesCount">@totalMovies</span> /
@@ -88,9 +95,9 @@
 
                     var releaseYear = movie.ReleaseYear != 0 ? movie.ReleaseYear.ToString() : "Sin año";
 
-                    var genreName = movie.Genre?.Name ?? "Sin género";
+                    var genreName = movie.GenreId;
 
-                    var directorName = movie.Director?.FullName ?? "Director no asignado";
+					var directorName = movie.DirectorId;
 
                     var searchTokens = string.Join(" ",
 

@@ -27,8 +27,12 @@ namespace PopQuiz.Api.Controllers
 
         // POST api/<MovieApiController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<bool>> Post([FromBody] Movie movie)
         {
+            var result = await movieBusiness.SaveCategoryAsync(movie);
+            if (result)
+                return CreatedAtAction(nameof(Get), new { id = movie.MovieId }, movie);
+            return BadRequest();
         }
 
         // PUT api/<MovieApiController>/5

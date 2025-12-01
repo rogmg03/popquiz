@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PopQuiz.Architecture;
 using PopQuiz.Architecture.Providers;
+using PopQuiz.Data.Models;
 using PopQuiz.MVCs.Models.ViewModels;
 
 
@@ -35,7 +38,7 @@ namespace PopQuiz.MVCs.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = $"Error loading categories: {ex.Message}";
+                ViewBag.Error = $"Error loading movies: {ex.Message}";
                 return View(new MovieViewModels());
             }
         }
@@ -55,17 +58,29 @@ namespace PopQuiz.MVCs.Controllers
         // POST: MovieController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(MovieViewModels movie)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var endpoint = $"{_apiBaseUrl}/MovieApi";
+                    var json = JsonProvider.Serialize(movie);
+                    
+                    await _restProvider.PostAsync(endpoint, json);
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", $"Error creating movie: {ex.Message}");
             }
+
+            return View(movie);
+
         }
+
+        
 
         // GET: MovieController/Edit/5
         public ActionResult Edit(int id)

@@ -565,7 +565,7 @@ footer {
     position: static !important;
 }
 
-
+/*
 input,
 input:focus,
 input[type="text"]:focus,
@@ -574,9 +574,24 @@ input[type="search"]:focus {
 }
 
     input::placeholder {
-        color: rgba(255, 255, 255, 0.6) !important; /* opcional */
+        color: rgba(255, 255, 255, 0.6) !important; 
     }
+    */
 
+
+/* Inputs globales en modo claro dentro de tarjetas blancas */
+.movie-form-card input,
+.movie-form-card select,
+.movie-form-card textarea {
+    color: black !important;
+}
+
+/* Modo oscuro (para login, búsqueda, etc.) */
+.auth-input,
+.movie-search-input,
+.roles-table select {
+    color: var(--color-text-main) !important;
+}
 
 /* ==== FIX PARA TABLAS EN MODO OSCURO ==== */
 
@@ -607,4 +622,102 @@ input[type="search"]:focus {
 /* Botones pequeños dentro de tabla */
 .roles-table .btn {
     color: #fff !important;
+}
+
+.movie-form-card {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.form-label {
+    font-size: 1.1rem;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    border: none;
+}
+
+.movie-form-card label {
+    color: #333 !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+
+/* === FORMULARIO DE PELÍCULAS (Diseño oscuro estilo PopQuiz) === */
+
+.movie-form-card {
+    background:
+        radial-gradient(circle at top left, rgba(34, 211, 238, 0.10), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.14), transparent 55%),
+        rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    backdrop-filter: blur(22px);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--color-text-main) !important;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+}
+
+/* Labels */
+.movie-form-card label {
+    color: var(--color-text-main) !important;
+    font-weight: 600 !important;
+    font-size: 1rem;
+}
+
+/* Inputs */
+.movie-form-card input,
+.movie-form-card select,
+.movie-form-card textarea {
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    color: var(--color-text-main) !important;
+    border-radius: 0.9rem;
+    padding: 0.75rem;
+}
+
+.movie-form-card input:focus,
+.movie-form-card select:focus,
+.movie-form-card textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent);
+    background: rgba(15, 23, 42, 0.95);
+}
+
+/* Radio buttons */
+.movie-form-card .form-check-input {
+    background-color: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.45);
+}
+
+.movie-form-card .form-check-input:checked {
+    background-color: var(--color-accent-strong);
+    border-color: var(--color-accent-strong);
+}
+
+/* Botón principal */
+.movie-form-card button[type="submit"] {
+    background-image: linear-gradient(120deg, var(--color-accent-strong), #3b82f6);
+    color: white;
+    border: none;
+    padding: 0.9rem 1.2rem;
+    border-radius: 0.9rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
+    box-shadow: 0 14px 35px rgba(37, 99, 235, 0.4);
+    transition: 0.2s ease-out;
+}
+
+.movie-form-card button[type="submit"]:hover {
+    filter: brightness(1.07);
+    box-shadow: 0 18px 45px rgba(37, 99, 235, 0.55);
 }
