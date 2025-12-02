@@ -19,6 +19,12 @@
             </div>
 
             <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-controller="Genre" asp-action="Create" class="btn btn-primary btn-lg">
+                        + Agregar Género
+                    </a>
+                }
                 <div class="movies-metrics">
                     <span class="movies-count-badge">
                         <span id="filteredGenresCount">@totalGenres</span> /
@@ -66,8 +72,7 @@
                 {
                     var searchTokens = genre.Name;
 
-                    <article class="movie-card"
-                             data-search="@searchTokens">
+                    <article class="movie-card" data-search="@searchTokens">
                         <div class="movie-card-poster genre-card-poster">
                             <div class="movie-poster-gradient"></div>
                             <div class="movie-poster-initial">
@@ -83,9 +88,29 @@
                                     @genre.Name
                                 </h2>
                             </header>
+
+                            <!-- BOTONES DE ACCIÓN -->
+                            <div class="movie-card-actions mt-3">
+                        @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-controller="Genre"
+                                       asp-action="Edit"
+                                       asp-route-id="@genre.GenreId"
+                                       class="btn btn-warning btn-sm w-100 mb-2">
+                                        ✏️ Editar
+                                    </a>
+
+                                    <a asp-controller="Genre"
+                                       asp-action="Delete"
+                                       asp-route-id="@genre.GenreId"
+                                       class="btn btn-danger btn-sm w-100">
+                                        🗑 Eliminar
+                                    </a>
+                                }
+                            </div>
                         </div>
                     </article>
-                        }
+                }
             </div>
 
             <div id="noGenresFound" class="empty-state-card d-none">

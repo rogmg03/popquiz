@@ -150,6 +150,26 @@
                                     <dd>@directorName</dd>
                                 </div>
                             </dl>
+                            <!-- BOTONES DE ACCIÓN -->
+                            <div class="movie-card-actions mt-3">
+                        @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-controller="Movie"
+                                    asp-action="Edit"
+                                    asp-route-id="@movie.MovieId"
+                                    class="btn btn-warning btn-sm w-100 mb-2">
+                                        ✏️ Editar
+                                    </a>
+
+                                    <a asp-controller="Movie"
+                                    asp-action="Delete"
+                                    asp-route-id="@movie.MovieId"
+                                    class="btn btn-danger btn-sm w-100">
+                                        🗑 Eliminar
+                                    </a>
+                                }
+                            </div>
+
                         </div>
                     </article>
 

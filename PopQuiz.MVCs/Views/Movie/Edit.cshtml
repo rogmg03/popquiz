@@ -1,0 +1,102 @@
+﻿@model PopQuiz.MVCs.Models.ViewModels.MovieViewModels
+
+@{
+    ViewData["Title"] = "Editar película";
+}
+<style>
+    input, select, textarea {
+        color: black !important;
+    }
+</style>
+
+<link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+
+<div class="movies-shell">
+    <!-- Header / Hero -->
+    <section class="movies-hero container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="eyebrow-label">PopQuiz Movies</span>
+                <h1 class="page-title">Editar película</h1>
+                <p class="page-subtitle">
+                    Modificá los datos de la película seleccionada.
+                </p>
+            </div>
+
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                <a asp-controller="Movie" asp-action="Index" class="btn btn-secondary btn-lg">
+                    ← Volver al catálogo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario -->
+    <section class="container mt-4">
+        <div class="movie-form-card shadow-lg">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="MovieId" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Title" class="form-label fw-bold"></label>
+                    <input asp-for="Title" class="form-control form-control-lg" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ReleaseYear" class="form-label fw-bold"></label>
+                    <input asp-for="ReleaseYear" class="form-control form-control-lg" />
+                    <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="GenreId" class="form-label fw-bold"></label>
+                    <input asp-for="GenreId" class="form-control form-control-lg" />
+                    <span asp-validation-for="GenreId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="DirectorId" class="form-label fw-bold"></label>
+                    <input asp-for="DirectorId" class="form-control form-control-lg" />
+                    <span asp-validation-for="DirectorId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Rating" class="form-label fw-bold"></label>
+                    <input asp-for="Rating" class="form-control form-control-lg" type="number" step="0.1" />
+                    <span asp-validation-for="Rating" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label fw-bold">¿Es solo para adultos?</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="IsAdult" value="true" />
+                        <label class="form-check-label">Sí</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="IsAdult" value="false" />
+                        <label class="form-check-label">No</label>
+                    </div>
+
+                    <span asp-validation-for="IsAdult" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        Guardar cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

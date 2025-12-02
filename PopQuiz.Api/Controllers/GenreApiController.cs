@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.IO;
+using Microsoft.AspNetCore.Mvc;
 using PopQuiz.Core.BusinessLogic;
 using PopQuiz.Data.Models;
 
@@ -20,27 +21,46 @@ namespace PopQuiz.Api.Controllers
 
         // GET api/<GenreApiController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Genre>> Get(int id)
         {
-            return "value";
+            var genre = await genreBusiness.GetGenres(id);
+            var genres = genre.FirstOrDefault();
+            if (genres == null)
+                return NotFound();
+            return Ok(genres);
         }
 
         // POST api/<GenreApiController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<bool>> Post([FromBody] Genre genre)
         {
+            var result = await genreBusiness.SaveGenreAsync(genre);
+            if (result)
+                return CreatedAtAction(nameof(Get), new { id = genre.GenreId }, genre);
+            return BadRequest();
         }
 
         // PUT api/<GenreApiController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<bool>> Put(int id, [FromBody] Genre genre)
         {
+            if (id != genre.GenreId)
+                return BadRequest();
+
+            var result = await genreBusiness.SaveGenreAsync(genre);
+            if (result)
+                return Ok(result);
+            return NotFound();
         }
 
         // DELETE api/<GenreApiController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<bool>> Delete(int id)
         {
+            var result = await genreBusiness.DeleteGenreAsync(id);
+            if (result)
+                return Ok(result);
+            return NotFound();
         }
     }
 }

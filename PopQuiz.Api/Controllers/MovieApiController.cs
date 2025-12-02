@@ -20,9 +20,13 @@ namespace PopQuiz.Api.Controllers
 
         // GET api/<MovieApiController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Movie>> Get(int id)
         {
-            return "value";
+            var movie = await movieBusiness.GetMoviesAsync(id);
+            var movies = movie.FirstOrDefault();
+            if (movies == null)
+                return NotFound();
+            return Ok(movies);
         }
 
         // POST api/<MovieApiController>
@@ -37,14 +41,25 @@ namespace PopQuiz.Api.Controllers
 
         // PUT api/<MovieApiController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<bool>> Put(int id, [FromBody] Movie movie)
         {
+            if (id != movie.MovieId)
+                return BadRequest();
+
+            var result = await movieBusiness.SaveCategoryAsync(movie);
+            if (result)
+                return Ok(result);
+            return NotFound();
         }
 
         // DELETE api/<MovieApiController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<bool>> Delete(int id)
         {
+            var result = await movieBusiness.DeleteMovieAsync(id);
+            if (result)
+                return Ok(result);
+            return NotFound();
         }
     }
 }

@@ -19,6 +19,12 @@
             </div>
 
             <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-controller="Director" asp-action="Create" class="btn btn-primary btn-lg">
+                        + Agregar Director
+                    </a>
+                }
                 <div class="movies-metrics">
                     <span class="movies-count-badge">
                         <span id="filteredDirectorsCount">@totalDirectors</span> /
@@ -85,6 +91,27 @@
                                     @director.FullName
                                 </h2>
                             </header>
+
+                            <!-- BOTONES DE ACCIÓN -->
+                            <div class="movie-card-actions mt-3">
+                        @if (User.IsInRole("Admin"))
+                                {
+
+                                    <a asp-controller="Director"
+                                    asp-action="Edit"
+                                    asp-route-id="@director.DirectorId"
+                                    class="btn btn-warning btn-sm w-100 mb-2">
+                                        ✏️ Editar
+                                    </a>
+
+                                    <a asp-controller="Director"
+                                    asp-action="Delete"
+                                    asp-route-id="@director.DirectorId"
+                                    class="btn btn-danger btn-sm w-100">
+                                        🗑 Eliminar
+                                    </a>
+                                }
+                            </div>
 
                         </div>
 

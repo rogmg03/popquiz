@@ -83,44 +83,83 @@ namespace PopQuiz.MVCs.Controllers
         
 
         // GET: MovieController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            try
+            {
+                var endpoint = $"{_apiBaseUrl}/MovieApi/{id}";
+                var response = await _restProvider.GetAsync(endpoint, id.ToString());
+                var movie = JsonProvider.DeserializeSimple<MovieViewModels>(response);
+                if (movie == null)
+                    return NotFound();
+                return View(movie);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = $"Error loading movie: {ex.Message}";
+                return NotFound();
+            }
         }
 
         // POST: MovieController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, MovieViewModels movie)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (id != movie.MovieId)
+                    return NotFound();
+
+                if (ModelState.IsValid)
+                {
+                    var endpoint = $"{_apiBaseUrl}/MovieApi/{id}";
+                    var json = JsonProvider.Serialize(movie);
+                    await _restProvider.PutAsync(endpoint, id.ToString(), json);
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", $"Error updating movie: {ex.Message}");
             }
+            return View(movie);
         }
 
         // GET: MovieController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: MovieController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
+                var endpoint = $"{_apiBaseUrl}/MovieApi/{id}";
+                var response = await _restProvider.GetAsync(endpoint, id.ToString());
+                var movie = JsonProvider.DeserializeSimple<MovieViewModels>(response);
+                if (movie == null)
+                    return NotFound();
+                return View(movie);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = $"Error loading movie: {ex.Message}";
+                return NotFound();
+            }
+        }
+
+        // POST: MovieController/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                var endpoint = $"{_apiBaseUrl}/MovieApi/{id}";
+                await _restProvider.DeleteAsync(endpoint, id.ToString());
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = $"Error deleting movie: {ex.Message}";
+                return RedirectToAction(nameof(Delete), new { id });
             }
         }
     }

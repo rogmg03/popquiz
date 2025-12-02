@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PopQuiz.Architecture;
 using PopQuiz.Architecture.Providers;
+using PopQuiz.Data.Models;
 using PopQuiz.MVCs.Models.ViewModels;
 
 
@@ -54,57 +55,105 @@ namespace PopQuiz.MVCs.Controllers
         // POST: DirectorController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(DirectorViewModels director)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var endpoint = $"{_apiBaseUrl}/DirectorApi";
+                    var json = JsonProvider.Serialize(director);
+
+                    await _restProvider.PostAsync(endpoint, json);
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", $"Error creating director: {ex.Message}");
             }
+
+            return View(director);
         }
 
         // GET: DirectorController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            try
+            {
+                var endpoint = $"{_apiBaseUrl}/DirectorApi/{id}";
+                var response = await _restProvider.GetAsync(endpoint, id.ToString());
+                var director = JsonProvider.DeserializeSimple<DirectorViewModels>(response);
+                if (director == null)
+                    return NotFound();
+                return View(director);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = $"Error loading director: {ex.Message}";
+                return NotFound();
+            }
         }
 
         // POST: DirectorController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, DirectorViewModels director)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (id != director.DirectorId)
+                    return NotFound();
+
+                if (ModelState.IsValid)
+                {
+                    var endpoint = $"{_apiBaseUrl}/DirectorApi/{id}";
+                    var json = JsonProvider.Serialize(director);
+                    await _restProvider.PutAsync(endpoint, id.ToString(), json);
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", $"Error updating director: {ex.Message}");
             }
+            return View(director);
         }
 
         // GET: DirectorController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: DirectorController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
+                var endpoint = $"{_apiBaseUrl}/DirectorApi/{id}";
+                var response = await _restProvider.GetAsync(endpoint, id.ToString());
+                var director = JsonProvider.DeserializeSimple<DirectorViewModels>(response);
+                if (director == null)
+                    return NotFound();
+                return View(director);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = $"Error loading director: {ex.Message}";
+                return NotFound();
+            }
+        }
+
+        // POST: DirectorController/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                var endpoint = $"{_apiBaseUrl}/DirectorApi/{id}";
+                await _restProvider.DeleteAsync(endpoint, id.ToString());
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = $"Error deleting director: {ex.Message}";
+                return RedirectToAction(nameof(Delete), new { id });
             }
         }
     }

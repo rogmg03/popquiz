@@ -1,0 +1,66 @@
+﻿@model PopQuiz.MVCs.Models.ViewModels.DirectorViewModels
+
+@{
+    ViewData["Title"] = "Editar director";
+}
+<style>
+    input, select, textarea {
+        color: black !important;
+    }
+</style>
+
+<link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+
+<div class="movies-shell">
+
+    <!-- Header / Hero -->
+    <section class="movies-hero container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="eyebrow-label">PopQuiz Directors</span>
+                <h1 class="page-title">Editar director</h1>
+                <p class="page-subtitle">
+                    Modificá los datos del director seleccionado.
+                </p>
+            </div>
+
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                <a asp-controller="Director" asp-action="Index" class="btn btn-secondary btn-lg">
+                    ← Volver al listado
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario -->
+    <section class="container mt-4">
+        <div class="movie-form-card shadow-lg">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="DirectorId" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Nombre completo -->
+                <div class="form-group mb-3">
+                    <label asp-for="FullName" class="form-label fw-bold"></label>
+                    <input asp-for="FullName" class="form-control form-control-lg" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <!-- Botón -->
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        Guardar cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

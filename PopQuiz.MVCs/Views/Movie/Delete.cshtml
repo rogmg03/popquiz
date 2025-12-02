@@ -1,0 +1,88 @@
+﻿@model PopQuiz.MVCs.Models.ViewModels.MovieViewModels
+
+@{
+    ViewData["Title"] = "Eliminar película";
+}
+<style>
+    input, select, textarea {
+        color: black !important;
+    }
+</style>
+
+<link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+
+<div class="movies-shell">
+
+    <!-- Header / Hero -->
+    <section class="movies-hero container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="eyebrow-label">PopQuiz Movies</span>
+                <h1 class="page-title text-danger">Eliminar película</h1>
+                <p class="page-subtitle">
+                    Esta acción es permanente. Confirmá si deseas eliminar la película seleccionada.
+                </p>
+            </div>
+
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                <a asp-controller="Movie" asp-action="Index" class="btn btn-secondary btn-lg">
+                    ← Volver al catálogo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card de confirmación -->
+    <section class="container mt-4">
+        <div class="movie-form-card shadow-lg p-4">
+
+            <h3 class="fw-bold text-danger mb-4">¿Seguro que deseas eliminar esta película?</h3>
+
+            <div class="mb-4">
+                <dl class="row">
+                    <dt class="col-sm-3 fw-bold">ID</dt>
+                    <dd class="col-sm-9">@Model.MovieId</dd>
+
+                    <dt class="col-sm-3 fw-bold">Título</dt>
+                    <dd class="col-sm-9">@Model.Title</dd>
+
+                    <dt class="col-sm-3 fw-bold">Año</dt>
+                    <dd class="col-sm-9">@Model.ReleaseYear</dd>
+
+                    <dt class="col-sm-3 fw-bold">Género ID</dt>
+                    <dd class="col-sm-9">@Model.GenreId</dd>
+
+                    <dt class="col-sm-3 fw-bold">Director ID</dt>
+                    <dd class="col-sm-9">@Model.DirectorId</dd>
+
+                    <dt class="col-sm-3 fw-bold">Rating</dt>
+                    <dd class="col-sm-9">@Model.Rating</dd>
+
+                    <dt class="col-sm-3 fw-bold">Adultos</dt>
+                    <dd class="col-sm-9">@Model.IsAdult</dd>
+                </dl>
+            </div>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="MovieId" />
+
+                <div class="d-flex gap-3">
+                    <button type="submit" class="btn btn-danger btn-lg w-50">
+                        🗑 Eliminar definitivamente
+                    </button>
+
+                    <a asp-action="Index" class="btn btn-secondary btn-lg w-50">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

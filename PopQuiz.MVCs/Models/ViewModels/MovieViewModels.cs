@@ -7,9 +7,7 @@ namespace PopQuiz.MVCs.Models.ViewModels
     public class MovieViewModels
     {
 
-        [BindNever]
-        [JsonIgnore]
-        public int? MovieId { get; set; }
+        public int MovieId { get; set; }
 
         public string Title { get; set; } = null!;
 

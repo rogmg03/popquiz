@@ -13,6 +13,7 @@ namespace PopQuiz.Core.BusinessLogic
         Task<bool> SaveCategoryAsync(Movie movie);
         Task<IEnumerable<Movie>> GetMoviesAsync(int? id);
         Task<bool> PurchaseMovieAsync(List<(int movieId, int quantity)> items, User user);
+        Task<bool> DeleteMovieAsync(int id);
     }
     public class MovieBusiness(IRepositoryMovie repositoryMovie) : IMovieBusiness
     {
@@ -76,6 +77,13 @@ namespace PopQuiz.Core.BusinessLogic
                 age--;
 
             return age;
+        }
+
+        public async Task<bool> DeleteMovieAsync(int id)
+        {
+            var movie = await repositoryMovie.FindAsync(id);
+            if (movie == null) return false;
+            return await repositoryMovie.DeleteAsync(movie);
         }
     }
 }

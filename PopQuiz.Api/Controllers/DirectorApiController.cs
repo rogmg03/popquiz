@@ -20,27 +20,46 @@ namespace PopQuiz.Api.Controllers
 
         // GET api/<DirectorApiController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Director>> Get(int id)
         {
-            return "value";
+            var director = await directorBusiness.GetDirectors(id);
+            var directors = director.FirstOrDefault();
+            if (directors == null)
+                return NotFound();
+            return Ok(directors);
         }
 
         // POST api/<DirectorApiController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<bool>> Post([FromBody] Director director)
         {
+            var result = await directorBusiness.SaveDirectorAsync(director);
+            if (result)
+                return CreatedAtAction(nameof(Get), new { id = director.DirectorId }, director);
+            return BadRequest();
         }
 
         // PUT api/<DirectorApiController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<bool>> Put(int id, [FromBody] Director director)
         {
+            if (id != director.DirectorId)
+                return BadRequest();
+
+            var result = await directorBusiness.SaveDirectorAsync(director);
+            if (result)
+                return Ok(result);
+            return NotFound();
         }
 
         // DELETE api/<DirectorApiController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<bool>> Delete(int id)
         {
+            var result = await directorBusiness.DeleteDirectorAsync(id);
+            if (result)
+                return Ok(result);
+            return NotFound();
         }
     }
 }

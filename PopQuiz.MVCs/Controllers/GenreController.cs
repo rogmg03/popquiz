@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.IO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PopQuiz.Architecture;
 using PopQuiz.Architecture.Providers;
+using PopQuiz.Data.Models;
 using PopQuiz.MVCs.Models.ViewModels;
 
 
@@ -54,57 +56,104 @@ namespace PopQuiz.MVCs.Controllers
         // POST: GenreController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(GenreViewModels genre)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var endpoint = $"{_apiBaseUrl}/GenreApi";
+                    var json = JsonProvider.Serialize(genre);
+
+                    await _restProvider.PostAsync(endpoint, json);
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", $"Error creating genre: {ex.Message}");
             }
+            return View(genre);
         }
 
         // GET: GenreController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            try
+            {
+                var endpoint = $"{_apiBaseUrl}/GenreApi/{id}";
+                var response = await _restProvider.GetAsync(endpoint, id.ToString());
+                var genre = JsonProvider.DeserializeSimple<GenreViewModels>(response);
+                if (genre == null)
+                    return NotFound();
+                return View(genre);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = $"Error loading genre: {ex.Message}";
+                return NotFound();
+            }
         }
 
         // POST: GenreController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, GenreViewModels genre)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (id != genre.GenreId)
+                    return NotFound();
+
+                if (ModelState.IsValid)
+                {
+                    var endpoint = $"{_apiBaseUrl}/GenreApi/{id}";
+                    var json = JsonProvider.Serialize(genre);
+                    await _restProvider.PutAsync(endpoint, id.ToString(), json);
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", $"Error updating genre: {ex.Message}");
             }
+            return View(genre);
         }
 
         // GET: GenreController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: GenreController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
+                var endpoint = $"{_apiBaseUrl}/GenreApi/{id}";
+                var response = await _restProvider.GetAsync(endpoint, id.ToString());
+                var genre = JsonProvider.DeserializeSimple<GenreViewModels>(response);
+                if (genre == null)
+                    return NotFound();
+                return View(genre);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = $"Error loading genre: {ex.Message}";
+                return NotFound();
+            }
+        }
+
+        // POST: GenreController/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                var endpoint = $"{_apiBaseUrl}/GenreApi/{id}";
+                await _restProvider.DeleteAsync(endpoint, id.ToString());
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = $"Error deleting genre: {ex.Message}";
+                return RedirectToAction(nameof(Delete), new { id });
             }
         }
     }
